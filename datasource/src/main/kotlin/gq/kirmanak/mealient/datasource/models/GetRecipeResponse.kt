@@ -15,7 +15,8 @@ data class GetRecipeResponse(
 
 @Serializable
 data class GetRecipeSettingsResponse(
-    @SerialName("disableAmount") val disableAmount: Boolean,
+    // Mealie v3 dropped this setting; amounts are always shown there
+    @SerialName("disableAmount") val disableAmount: Boolean = false,
 )
 
 @Serializable
@@ -27,8 +28,9 @@ data class GetRecipeIngredientResponse(
     @SerialName("display") val display: String,
     @SerialName("referenceId") val referenceId: String,
     @SerialName("title") val title: String?,
-    @SerialName("isFood") val isFood: Boolean,
-    @SerialName("disableAmount") val disableAmount: Boolean,
+    // Mealie v3 dropped both per-ingredient flags. Default to showing the server's "display" text.
+    @SerialName("isFood") val isFood: Boolean = false,
+    @SerialName("disableAmount") val disableAmount: Boolean = false,
 )
 
 @Serializable
