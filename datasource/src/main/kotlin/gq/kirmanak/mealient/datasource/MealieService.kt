@@ -1,5 +1,9 @@
 package gq.kirmanak.mealient.datasource
 
+import gq.kirmanak.mealient.datasource.models.CreateInviteRequest
+import gq.kirmanak.mealient.datasource.models.EmailInviteRequest
+import gq.kirmanak.mealient.datasource.models.EmailInviteResponse
+import gq.kirmanak.mealient.datasource.models.InviteTokenResponse
 import gq.kirmanak.mealient.datasource.models.CreateApiTokenRequest
 import gq.kirmanak.mealient.datasource.models.CreateApiTokenResponse
 import gq.kirmanak.mealient.datasource.models.CreateRecipeRequest
@@ -70,4 +74,8 @@ internal interface MealieService {
     suspend fun updateShoppingList(id: String, request: JsonElement)
     
     suspend fun getShoppingListJson(id: String) : JsonElement
+
+    suspend fun createInvite(request: CreateInviteRequest): InviteTokenResponse
+
+    suspend fun emailInvite(request: EmailInviteRequest): EmailInviteResponse
 }

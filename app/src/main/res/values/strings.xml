@@ -81,4 +81,20 @@
 	<string name="activity_main_logout_confirmation_message">Are you sure you want to log yourself out?</string>
 	<string name="activity_main_logout_confirmation_positive">Log out</string>
 	<string name="activity_main_logout_confirmation_negative">Cancel</string>
+	<string name="menu_navigation_drawer_invite">Invite</string>
+	<string name="fragment_invite_title">Invite someone to your household</string>
+	<string name="fragment_invite_explanation">An invite link lets one person sign up and join your household, so you share the same recipes, shopping lists and meal plans. Each link works once.</string>
+	<string name="fragment_invite_create">Create invite link</string>
+	<string name="fragment_invite_create_another">Create another link</string>
+	<string name="fragment_invite_copy">Copy</string>
+	<string name="fragment_invite_share">Share</string>
+	<string name="fragment_invite_email_explanation">Or email it. The Mealie server sends it if it can. If its mail server can\'t deliver to that address, your phone\'s mail app opens with the invite ready to send.</string>
+	<string name="fragment_invite_email_hint">Their email</string>
+	<string name="fragment_invite_send">Send invite</string>
+	<string name="fragment_invite_link_failed">Couldn\'t create an invite link. Check that you\'re connected to the server.</string>
+	<string name="fragment_invite_bad_email">That doesn\'t look like an email address</string>
+	<string name="fragment_invite_sent_by_server">Invite sent to %1$s</string>
+	<string name="fragment_invite_opening_mail_app">The server couldn\'t email %1$s, so your mail app is opening</string>
+	<string name="fragment_invite_mail_subject">Join our Mealie household</string>
+	<string name="fragment_invite_mail_body">You\'re invited to join our recipes, shopping lists and meal plans in Mealie. Sign up with this link (it works once):\n\n%1$s\n\nThe server is private, so open the link on a device that can reach it.</string>
 </resources>

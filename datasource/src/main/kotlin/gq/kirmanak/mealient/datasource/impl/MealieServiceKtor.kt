@@ -2,6 +2,10 @@ package gq.kirmanak.mealient.datasource.impl
 
 import gq.kirmanak.mealient.datasource.MealieService
 import gq.kirmanak.mealient.datasource.ServerUrlProvider
+import gq.kirmanak.mealient.datasource.models.CreateInviteRequest
+import gq.kirmanak.mealient.datasource.models.EmailInviteRequest
+import gq.kirmanak.mealient.datasource.models.EmailInviteResponse
+import gq.kirmanak.mealient.datasource.models.InviteTokenResponse
 import gq.kirmanak.mealient.datasource.models.CreateApiTokenRequest
 import gq.kirmanak.mealient.datasource.models.CreateApiTokenResponse
 import gq.kirmanak.mealient.datasource.models.CreateRecipeRequest
@@ -247,5 +251,21 @@ internal class MealieServiceKtor @Inject constructor(
             path(path)
             block()
         }
+    }
+
+    override suspend fun createInvite(request: CreateInviteRequest): InviteTokenResponse {
+        return httpClient.post {
+            endpoint("/api/households/invitations")
+            contentType(ContentType.Application.Json)
+            setBody(request)
+        }.body()
+    }
+
+    override suspend fun emailInvite(request: EmailInviteRequest): EmailInviteResponse {
+        return httpClient.post {
+            endpoint("/api/households/invitations/email")
+            contentType(ContentType.Application.Json)
+            setBody(request)
+        }.body()
     }
 }

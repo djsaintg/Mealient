@@ -1,5 +1,7 @@
 package gq.kirmanak.mealient.datasource
 
+import gq.kirmanak.mealient.datasource.models.EmailInviteResponse
+import gq.kirmanak.mealient.datasource.models.InviteTokenResponse
 import gq.kirmanak.mealient.datasource.models.CreateApiTokenRequest
 import gq.kirmanak.mealient.datasource.models.CreateApiTokenResponse
 import gq.kirmanak.mealient.datasource.models.CreateRecipeRequest
@@ -82,4 +84,10 @@ interface MealieDataSource {
     suspend fun deleteShoppingList(id: String)
 
     suspend fun updateShoppingListName(id: String, name: String)
+
+    /** A one-time invite into the signed-in user's own household. */
+    suspend fun createInvite(uses: Int): InviteTokenResponse
+
+    /** Asks the server to email the invite. Fails (success = false) when its mail server won't deliver there. */
+    suspend fun emailInvite(email: String, token: String): EmailInviteResponse
 }

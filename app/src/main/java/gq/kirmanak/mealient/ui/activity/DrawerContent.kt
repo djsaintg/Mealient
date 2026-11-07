@@ -6,6 +6,7 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Logout
+import androidx.compose.material.icons.filled.PersonAdd
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.filled.SyncAlt
 import androidx.compose.material3.DrawerState
@@ -27,6 +28,7 @@ import gq.kirmanak.mealient.ui.NavGraphs
 import gq.kirmanak.mealient.ui.components.DrawerItem
 import gq.kirmanak.mealient.ui.destinations.AddRecipeScreenDestination
 import gq.kirmanak.mealient.ui.destinations.BaseURLScreenDestination
+import gq.kirmanak.mealient.ui.destinations.InviteScreenDestination
 import gq.kirmanak.mealient.ui.destinations.RecipesListDestination
 import kotlinx.coroutines.launch
 
@@ -90,6 +92,11 @@ internal fun createDrawerItems(
             nameRes = R.string.menu_navigation_drawer_shopping_lists,
             icon = Icons.Default.ShoppingCart,
             direction = NavGraphs.shoppingLists,
+        ),
+        createNavigationItem(
+            nameRes = R.string.menu_navigation_drawer_invite,
+            icon = Icons.Default.PersonAdd,
+            direction = InviteScreenDestination,
         ),
         createNavigationItem(
             nameRes = R.string.menu_navigation_drawer_change_url,

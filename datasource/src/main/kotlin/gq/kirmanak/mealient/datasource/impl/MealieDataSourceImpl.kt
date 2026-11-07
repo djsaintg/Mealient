@@ -1,5 +1,9 @@
 package gq.kirmanak.mealient.datasource.impl
 
+import gq.kirmanak.mealient.datasource.models.CreateInviteRequest
+import gq.kirmanak.mealient.datasource.models.EmailInviteRequest
+import gq.kirmanak.mealient.datasource.models.EmailInviteResponse
+import gq.kirmanak.mealient.datasource.models.InviteTokenResponse
 import gq.kirmanak.mealient.datasource.MealieDataSource
 import gq.kirmanak.mealient.datasource.MealieService
 import gq.kirmanak.mealient.datasource.NetworkError
@@ -271,4 +275,18 @@ internal class MealieDataSourceImpl @Inject constructor(
         }.let(::JsonObject)
         updateShoppingList(id, updatedItem)
     }
+
+    override suspend fun createInvite(uses: Int): InviteTokenResponse =
+        networkRequestWrapper.makeCallAndHandleUnauthorized(
+            block = { service.createInvite(CreateInviteRequest(uses = uses)) },
+            logMethod = { "createInvite" },
+            logParameters = { "uses = $uses" },
+        )
+
+    override suspend fun emailInvite(email: String, token: String): EmailInviteResponse =
+        networkRequestWrapper.makeCallAndHandleUnauthorized(
+            block = { service.emailInvite(EmailInviteRequest(email = email, token = token)) },
+            logMethod = { "emailInvite" },
+            logParameters = { "email = $email" },
+        )
 }
