@@ -46,7 +46,10 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            signingConfig = signingConfigs.getByName("release")
+            // Without keystore.properties (CI) the APK comes out unsigned, to be signed offline
+            if (rootProject.file("keystore.properties").canRead()) {
+                signingConfig = signingConfigs.getByName("release")
+            }
         }
     }
 
