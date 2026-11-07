@@ -22,9 +22,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
-
+      # GitHub's Ubuntu runners ship the Android SDK (ANDROID_HOME); setup-android@v3 fails on the removed 'tools' package
       - name: Unsigned release APK
         run: |
           ./gradlew :app:assembleRelease
