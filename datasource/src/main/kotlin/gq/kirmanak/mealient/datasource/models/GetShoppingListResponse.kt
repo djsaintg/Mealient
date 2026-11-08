@@ -9,7 +9,7 @@ data class GetShoppingListResponse(
     @SerialName("groupId") val groupId: String,
     @SerialName("name") val name: String = "",
     @SerialName("listItems") val listItems: List<GetShoppingListItemResponse> = emptyList(),
-    @SerialName("recipeReferences") val recipeReferences: List<GetShoppingListItemRecipeReferenceFullResponse>,
+    @SerialName("recipeReferences") val recipeReferences: List<GetShoppingListItemRecipeReferenceFullResponse> = emptyList(),
 )
 
 @Serializable
