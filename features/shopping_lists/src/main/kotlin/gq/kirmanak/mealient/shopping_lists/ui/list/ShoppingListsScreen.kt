@@ -1,6 +1,18 @@
 package gq.kirmanak.mealient.shopping_lists.ui.list
 
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -135,6 +147,8 @@ private fun ShoppingListsScreenDialog(
     }
 }
 
+/** A list's card: tap to open, long-press for its menu (rename, delete), or swipe right to rename and left to delete. */
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun ShoppingListCard(
     listName: String,
@@ -156,6 +170,9 @@ private fun ShoppingListCard(
             listName
         ),
         content = {
+            var menuOpen by remember { mutableStateOf(false) }
+            val haptics = LocalHapticFeedback.current
+            Box {
             Card(
                 modifier = Modifier
                     .padding(
@@ -163,8 +180,13 @@ private fun ShoppingListCard(
                         vertical = Dimens.Small
                     )
                     .fillMaxWidth()
-                    .clickable(
-                        onClick = onClick
+                    .combinedClickable(
+                        onClick = onClick,
+                        onLongClick = {
+                            haptics.performHapticFeedback(HapticFeedbackType.LongPress)
+                            menuOpen = true
+                        },
+                        onLongClickLabel = stringResource(id = R.string.shopping_lists_menu_rename),
                     )
             ) {
                 Row(
@@ -185,6 +207,22 @@ private fun ShoppingListCard(
                         text = listName,
                     )
                 }
+            }
+            DropdownMenu(
+                expanded = menuOpen,
+                onDismissRequest = { menuOpen = false },
+            ) {
+                DropdownMenuItem(
+                    text = { Text(stringResource(id = R.string.shopping_lists_menu_rename)) },
+                    leadingIcon = { Icon(Icons.Default.Edit, contentDescription = null) },
+                    onClick = { menuOpen = false; onEdit() },
+                )
+                DropdownMenuItem(
+                    text = { Text(stringResource(id = R.string.shopping_lists_menu_delete), color = MaterialTheme.colorScheme.error) },
+                    leadingIcon = { Icon(Icons.Default.Delete, contentDescription = null, tint = MaterialTheme.colorScheme.error) },
+                    onClick = { menuOpen = false; onDelete() },
+                )
+            }
             }
         },
     )
